@@ -3,6 +3,21 @@ spring:
     active: dev
   application:
     name: spring-dynamic-cors-management
+  datasource:
+    url: jdbc:postgresql://localhost:5432/experiment1
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: experiment_one
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
 
 server:
   port: 9099
