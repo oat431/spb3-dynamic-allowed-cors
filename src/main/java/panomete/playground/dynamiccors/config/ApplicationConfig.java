@@ -1,6 +1,5 @@
 package panomete.playground.dynamiccors.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -34,7 +33,6 @@ public class ApplicationConfig {
         return ALLOWED_ORIGINS;
     }
 
-    @Bean
     WebMvcConfigurer corsConfigurer() throws IOException {
         String[] ALLOWED_ORIGINS = getAllowedCors();
         return new WebMvcConfigurer() {
