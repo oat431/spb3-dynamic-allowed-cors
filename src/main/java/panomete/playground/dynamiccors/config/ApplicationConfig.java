@@ -2,14 +2,12 @@ package panomete.playground.dynamiccors.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -33,18 +31,24 @@ public class ApplicationConfig {
 //        return source;
 //    }
 
-    @Bean
-    WebMvcConfigurer corsConfigurer() throws FileNotFoundException {
-        File file = new File("D:\\programming_practice\\java\\dynamiccors\\src\\main\\resources\\dynamic_cors.txt");
+    private String[] getAllowedCors() throws IOException {
+        ClassPathResource resource = new ClassPathResource("dynamic_cors.txt");
+        File file = resource.getFile();
         Scanner in = new Scanner(file);
-        List<String> allowedOrigin = new ArrayList<>();
+        List<String> allowedOrigins = new ArrayList<>();
         while(in.hasNext()) {
-            allowedOrigin.add(in.nextLine());
+            allowedOrigins.add(in.nextLine());
         }
-        String[] ALLOWED_ORIGINS = new String[allowedOrigin.size()];
-        for(int i=0;i<allowedOrigin.size();i++) {
-            ALLOWED_ORIGINS[i] = allowedOrigin.get(i);
+        String[] ALLOWED_ORIGINS = new String[allowedOrigins.size()];
+        for(int i = 0; i < allowedOrigins.size(); i++) {
+            ALLOWED_ORIGINS[i] = allowedOrigins.get(i);
         }
+        return ALLOWED_ORIGINS;
+    }
+
+    @Bean
+    WebMvcConfigurer corsConfigurer() throws IOException {
+        String[] ALLOWED_ORIGINS = getAllowedCors();
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {

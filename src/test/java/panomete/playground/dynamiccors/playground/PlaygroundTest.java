@@ -1,6 +1,7 @@
 package panomete.playground.dynamiccors.playground;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.core.io.ClassPathResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,15 +12,19 @@ import java.io.File;
 public class PlaygroundTest {
     @Test
     void readFile() throws IOException {
-        File file = new File("D:\\programming_practice\\java\\dynamiccors\\src\\main\\resources\\dynamic_cors.txt");
+        ClassPathResource resource = new ClassPathResource("dynamic_cors.txt");
+        File file = resource.getFile();
         Scanner in = new Scanner(file);
-        List<String> allowedOrigin = new ArrayList<>();
+        List<String> allowedOrigins = new ArrayList<>();
         while(in.hasNext()) {
-            allowedOrigin.add(in.nextLine());
+            allowedOrigins.add(in.nextLine());
         }
-        for(String i : allowedOrigin) {
-            System.out.println(i);
+        String[] ALLOWED_ORIGINS = new String[allowedOrigins.size()];
+        for(int i = 0; i < allowedOrigins.size(); i++) {
+            ALLOWED_ORIGINS[i] = allowedOrigins.get(i);
         }
-        System.out.println(String.valueOf(allowedOrigin));
+        for(String s : ALLOWED_ORIGINS) {
+            System.out.println(s);
+        }
     }
 }
