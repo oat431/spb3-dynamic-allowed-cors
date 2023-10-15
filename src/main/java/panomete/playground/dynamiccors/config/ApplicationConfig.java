@@ -19,18 +19,6 @@ public class ApplicationConfig {
             "GET", "POST", "PUT", "DELETE", "OPTIONS"
     };
 
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource() throws FileNotFoundException {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins(ALLOWED_ORIGINS);
-//        configuration.setAllowedMethods(List.of(ALLOWED_METHOD));
-//        configuration.setAllowedHeaders(List.of("*"));
-//        configuration.setExposedHeaders(List.of("*"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
-
     private String[] getAllowedCors() throws IOException {
         ClassPathResource resource = new ClassPathResource("dynamic_cors.txt");
         File file = resource.getFile();
