@@ -6,6 +6,10 @@
 - each microservice will have its own CORS configuration
 - this experiment is to test how to manage CORS configuration dynamically
 
+### result
+- it can add dynamic allowed cors but only allowed for one monolith client
+- it will stuck on api gate way which I don't know how to config them
+
 ### Reference Documentation
 
 For further reference, please consider the following sections:
